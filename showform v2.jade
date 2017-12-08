@@ -1,0 +1,157 @@
+doctype html
+html(ng-app="plunker")
+  head
+    title GIS Project
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', type='text/css', href='/public/css/bootstrap.css')
+    link(rel='stylesheet', type='text/css', href='/public/css/wraplogin.css')
+    link(rel='stylesheet', href='/public/css/configmap.css')
+    script(src='/public/js/jquery-3.2.1.min.js')
+    script(src='/public/js/bootstrap.min.js')
+    script.
+      document.write('<base href="' + document.location + '" />');
+    script(data-require='angular.js@1.3.x', src='https://code.angularjs.org/1.3.16/angular.js', data-semver='1.3.16')
+    script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyD5isMbzRr_Ewadqb9eYq8cqet74mMeQ-E')
+    script(src='/public/js/configmap.js')
+      
+    style.
+      body {
+      position: relative;
+      }
+      #section1 {color: #080808; position: relative; top: 90px;}
+      #section2 {color: #fff; position: relative; top: 90px}
+      #section3 {color: #fff; background-color: #ff9800; position: relative; top: 90px}
+      #section41 {color: #fff; background-color: #00bcd4; position: relative; top: 90px}
+      #section42 {color: #fff; background-color: #009688; position: relative; top: 90px}
+      #brand { position: relative; top: 60px;}
+      /*@media screen and (max-width: 810px) {
+      #section1, #section2, #section3, #section41, #section42  {
+      margin-left: 150px;
+      }
+      }*/
+  body
+    // Navigation
+    nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+      .container
+        // Brand and toggle get grouped for better mobile display
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          
+        // Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            //a.navbar-brand(href="javascript:tab('#section1')" onclick='location.reload()') Home
+            -for(i in showmenu){
+                li()
+                  a(href="javascript:tab('#{showmenu[i].link}')") #{showmenu[i].txt}
+            -}
+        // /.navbar-collapse
+      // /.container
+    // Banner
+    section.container
+      .row
+        #brand.col-sm-12
+          img.img-responsive(src='/public/img/banner.png')
+    // Main
+    .container
+      .row
+        .col-sm-12
+          .tab-content
+            #section1.tab-pane
+              center
+                div(ng-controller='MainCtrl')
+                  #map-canvas
+            #section2.tab-pane
+              form.login(form='', form-horizontal='', method='post', action='/addContact')
+                .form-group
+                  input#name(type='text', name='name', placeholder='Name')
+                .form-group
+                  input#phone(type='text', name='phone', placeholder='Phone number')
+                .form-group
+                  input#email(type='text', name='email', placeholder='Email')
+                .form-group
+                  input#subject(type='text', name='subject', placeholder='Subject')
+                .form-group
+                  input#message(type='text', name='message', placeholder='Message')
+                .form-group
+                  input#contact.btn.btn-success(type='submit', name='contact' value="Submit")
+            #section3.tab-pane
+              .wrap
+                p.form-title Sign In
+                form.login(method='post', action='/admin_login')
+                  input#username(type='text', placeholder='Username', name='username' onkeyup='controlchars(this,alpha);')
+                  input#password(type='password', placeholder='Password', name='password' onkeyup='controlchars(this,alpha);')
+                  input.btn.btn-success.btn-sm(type='submit', value='SignIn')
+                  .remember-forgot
+                    .row
+                      .col-md-6
+                        .checkbox
+                          label
+                            input(type='checkbox')
+                            | Remember Me
+                      .col-md-6.forgot-pass-content
+                        a.forgot-pass(href='javascription:void(0)') Forgot Password
+            #section4.tab-pane
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+              br
+  script.
+    sec = window.location.href.toString().split('/')[3]
+    if(sec==''||sec=='admin') sec = '#section1'
+
+    $('.active').removeClass('active')
+    $(sec).addClass('active')
+    function tab(ass){
+      $('.active').removeClass('active')
+      location.assign('/'+ass)
+      $(ass).addClass('active')
+    }
+    /*var phone = "()- 0123456789";
+    var alpha = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    function controlchars(thestr,controlstr)
+    {
+    if(controlstr.indexOf(thestr.value.charAt(thestr.value.length - 1)) == -1)
+    {
+    var x=thestr.value.length - 1;
+    thestr.value=thestr.value.substring(0,x)
+    }
+    }*/
+
+

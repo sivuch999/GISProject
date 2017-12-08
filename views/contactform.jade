@@ -1,0 +1,212 @@
+doctype html
+html
+  head
+    title Bootstrap Example
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', type='text/css', href='/public/css/wraplogin.css')
+    
+    
+    script(src='/public/js/sweetalert.js')
+    
+    //script(src='/public/js/zingchart-angularjs.js')
+    script(src='/public/js/zingchart.min.js')
+    
+
+    //angular + jquery//
+    script(src='/public/js/jquery-3.2.1.min.js')
+    script(src='/public/js/angular.min.js')
+    //bootstrap//
+    link(rel='stylesheet', type='text/css', href='/public/css/bootstrap.css')
+    script(src='/public/js/bootstrap.min.js')
+
+    //googlemap + configmap//
+    link(rel='stylesheet', href='/public/css/configmap.css')
+    script.
+      document.write('<base href="' + document.location + '" />');
+    script(data-require='angular.js@1.3.x', src='https://code.angularjs.org/1.3.16/angular.js', data-semver='1.3.16')
+    script(src='https://maps.googleapis.com/maps/api/js?key=AIzaSyD5isMbzRr_Ewadqb9eYq8cqet74mMeQ-E')
+    script(src='/public/js/configmap.js')
+
+    //highchart + configchart//
+    script(src='/public/js/highcharts.js')
+    script(src='/public/js/data.js')
+    script(src='/public/js/drilldown.js')
+
+    link(rel='stylesheet', href='/public/css/checkbox.css')
+
+
+    style.
+      input[type=text]:disabled {
+        background: #fff;
+      }
+      textarea[type=text]:disabled {
+        background: #fff;
+      }
+      body {
+      position: relative;
+      }
+      #section1 {position: relative; top: 90px}
+      #section2 {position: relative; top: 90px}
+      #section3 {position: relative; top: 90px}
+      #section4 {position: relative; top: 40px}
+      #section5 {position: relative; top: 17px}
+      #section6 {position: relative; top: 70px}
+      #chart {position: relative; top: 40px}
+      #brand {position: relative; top: 60px;}
+      /*@media screen and (max-width: 810px) {
+      #section1, #section2, #section3, #section41, #section42  {
+      margin-left: 150px;
+      }
+      }*/
+  body
+    // Navigation
+    nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+      .container
+        // Brand and toggle get grouped for better mobile display
+        .navbar-header
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          
+        // Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          ul.nav.navbar-nav
+                li
+                  a(href='/admin') Home
+                  -for(i in showmenu){
+                      li
+                        a(href='#{showmenu[i].link}') #{showmenu[i].txt}
+                  -}
+        // /.navbar-collapse
+      // /.container
+    section.container
+      // Banner
+      section.container
+        .row
+          #brand.col-sm-12
+            img.img-responsive(src='/public/img/banner.png')
+    section.container.footer-container
+      .row
+        .col-sm-3
+          label(style='color:white;')
+            | Licened by
+    section.container
+      .row
+        .col-sm-12
+          #section5
+            p.form-title Contact User
+      .row
+        .col-sm-12
+          -if(pageCount > 1){
+            ul.pagination
+              -if(currentPage > 1){
+                li
+                  a(href='adminContact?page=1') &laquo;
+              -}
+              -i = 1;
+              -if(currentPage > 5){
+                -i = +currentPage - 3;
+              -}
+              -if(i != 1){
+                |..
+              -}
+              -for(i; i<=pageCount; i++){
+                -if(currentPage == i){
+                  li.active
+                    a [#{i}]
+                -} else {
+                  li
+                    a(href='adminContact?page=#{i}') [#{i}]
+                -}
+                -if(i == (+currentPage + 3) && (currentPage+3)<pageCount){
+                  |..
+                  -break
+                -}
+              -}
+              -if(currentPage != pageCount){
+                li
+                  a(href='adminContact?page=#{pageCount}') &raquo;
+              -}
+          -}
+      .row
+        .col-sm-12
+          table(class="table .table-striped")
+            tr
+              th 
+                center Name
+              th
+                center Phone
+              th
+                center Email
+              th
+                center Subject
+              th
+                center More
+              th
+                center Delete
+                  -for(i in students){
+                    tr
+                      td
+                        center #{students[i].contact_name}
+                      td
+                        center #{students[i].contact_phone}
+                      td
+                        center #{students[i].contact_email}
+                      td
+                        center #{students[i].contact_subject}
+                      td
+                        center
+                          button.btn.btn-info(type='button', data-toggle='modal', data-target='#moremodal#{i}') เพิ่มเติม
+                      td
+                        center
+                          button.btn.btn-danger(type='button' data-toggle='modal', data-target='#delmodal#{i}') ลบ   
+                    -}
+        -for(i in students){              
+          // Modal
+          .modal.fade(id='moremodal#{i}', role='dialog')
+            form.modal-dialog(name='morecontact#{i}' method='post', action='/moreContact')
+                // Modal content
+                .modal-content
+                  .modal-header
+                    button.close(type='button', data-dismiss='modal') ×
+                    h4.modal-title Modal Header
+                  .modal-body
+                    input#more_userid.form-control(name='more_contactid' type='hidden' value='#{students[i].contact_id')
+                    .form-group
+                      label.col-form-label Name:
+                      input#more_username.form-control(name='more_contactname' disabled='disabled' type='text' value='#{students[i].contact_name}')
+                    .form-group
+                      label.col-form-label Phone:
+                      input#more_password.form-control(name='more_contactphone' disabled='disabled' type='text' value='#{students[i].contact_phone}')
+                    .form-group
+                      label.col-form-label Email:
+                      input#more_name.form-control(name='more_contactemail' disabled='disabled' type='text' value='#{students[i].contact_email}')
+                    .form-group
+                      label.col-form-label Subject:
+                      input#more_name.form-control(name='more_contactsubject' disabled='disabled' type='text' value='#{students[i].contact_subject}')
+                    .form-group
+                      label.col-form-label Message:
+                      textarea#more_name.form-control(name='more_contactmessage' disabled='disabled' type='text' rows='8' value='#{students[i].contact_message}') #{students[i].contact_message}awdasdasdasdawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdasawdasdasdas
+                    .modal-footer
+                      button.btn.btn-default(type='button', data-dismiss='modal') Close 
+        -}
+        -for(i in students){
+          // Modal
+          .modal.fade(id='delmodal#{i}', role='dialog')
+            form.modal-dialog(name='delcontact#{i}' method='post', action='/delContact')
+                // Modal content
+                .modal-content
+                  .modal-header
+                    button.close(type='button', data-dismiss='modal') ×
+                    h4.modal-title Are you sure Delete?
+                  .modal-footer
+                      input#del_username.form-control(name='del_contactid' type='hidden' value='#{students[i].contact_id}')
+                      input#edituser.btn.btn-danger(type='submit', name='delcontact' value="YES")
+                      button.btn.btn-info(type='button', data-dismiss='modal') NO
+        -}
+    footer
+      .screen-row
+        label(style='color:white;')
+            | Licened by   

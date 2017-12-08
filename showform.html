@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="/public/css/wraplogin.css" />
+
+  <script src="/public/js/jquery-3.2.1.min.js"></script>
+  <script src="/public/js/bootstrap.min.js"></script>
+  <style>
+  body {
+      position: relative;
+  }
+  #section1 {color: #fff; background-color: #1E88E5; position: relative; top: 90px;}
+  #section2 {color: #fff; background-color: #673ab7; position: relative; top: 90px}
+  #section3 {color: #fff; background-color: #ff9800; position: relative; top: 90px}
+  #section41 {color: #fff; background-color: #00bcd4; position: relative; top: 90px}
+  #section42 {color: #fff; background-color: #009688; position: relative; top: 90px}
+  #brand { position: relative; top: 60px;}
+
+  /*@media screen and (max-width: 810px) {
+    #section1, #section2, #section3, #section41, #section42  {
+        margin-left: 150px;
+    }
+  }*/
+  </style>
+</head>
+<body>
+  
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                  <a href="#">Home</a>
+                    <li>
+                        <a href="#section1">Admin</a>
+                    </li>
+
+                    <li>
+                        <a href="#section2">Contact</a>
+                    </li>
+
+                    <li>
+                        <a href="#section3">Login</a>
+                    </li>
+                    
+                    <li class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Section 4 <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="#section41">Section 4-1</a></li>
+                        <li><a href="#section42">Section 4-2</a></li>
+                      </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+<!-- Banner -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12" id="brand">
+      <img src="/public/img/banner.png" class="img-responsive">
+    </div>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+    <div class="tab-content">
+      <div id="section1" class="tab-pane fade in active">    
+        <h1>Section 1</h1>
+        <p>Try to scroll this section and look at the navigation list while scrolling!</p>
+      </div>
+      <div id="section2" class="tab-pane fade">
+        <form form form-horizontal method="post" action="/showData">
+          <div class="form-group">
+            <input class="form-control" type="text" name="fname" id="fname" placeholder="Name">
+          </div>
+          <div class="form-group">
+            <input class="form-control" type="text" name="phone" id="phone" placeholder="Phone number">
+          </div>
+          <div class="form-group">
+            <input class="form-control" type="text" name="email" id="email" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <input class="form-control" type="text" name="subject" id="subject" placeholder="Subject">
+          </div>
+          <div class="form-group">
+            <input class="form-control" type="text" name="message" id="message" placeholder="Message">
+          </div>
+          <div class="form-group">
+            <input class="form-control btn btn-success" type="submit" name="contact" id="contact">
+          </div>
+        </form>
+      </div>
+
+      <div id="section3" class="tab-pane fade">
+        <div class="wrap">
+          <p class="form-title">Sign In</p>          
+          <form class="login" method="post" action="/admin">
+            <input type="text" placeholder="Username" name="username" id="username">
+            <input type="password" placeholder="Password"  name="password" id="password"/>
+            <input type="submit" value="SignIn" class="btn btn-success btn-sm" />
+            <div class="remember-forgot">
+              <div class="row">
+                <div class="col-md-6">
+                    <div class="checkbox">
+                      <label><input type="checkbox">Remember Me</label>
+                    </div>
+                      </div>
+                    <div class="col-md-6 forgot-pass-content">
+                      <a href="javascription:void(0)" class="forgot-pass">Forgot Password</a>
+                    </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div id="section41" class="tab-pane fade">
+        <h1>Section 4-1</h1>
+        <p>Try to scroll this section and look at the navigation list while scrolling!</p>
+      </div>     
+      <div id="section42" class="tab-pane fade">
+        <h1>Section 4-2</h1>
+        <p>Try to scroll this section and look at the navigation list while scrolling!</p>
+        <br><br><br><br><br><br>
+        <br><br><br><br><br><br>
+        <br><br><br><br><br><br>
+        <br><br><br><br><br><br>
+        <br><br><br><br><br><br>
+        <br><br><br><br><br><br>
+      </div>
+     </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+<script>
+$(document).ready(function(){
+    $(".navbar-nav a").click(function(){
+        $(this).tab('show');
+    });
+});
+</script>
+</html>
